@@ -19,7 +19,7 @@ public class Lavagna {
         for(int i = 0; i < messagio.size(); i++){
             testo += messagio.get(i).toString();
         }
-        testo += "END";
+        testo += "\nEND";
         return testo;
     }
 

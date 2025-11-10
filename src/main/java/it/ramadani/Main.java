@@ -32,7 +32,7 @@ public class Main {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
             ) {
-                System.out.println("WELCOME");
+                out.println("WELCOME");
 
                 String linea;
                 while((linea = in.readLine()) != null){
@@ -45,38 +45,50 @@ public class Main {
                     String cmd = parti[0].toUpperCase();
 
                     if (utente == null && !cmd.equals("LOGIN") && !cmd.equals("QUIT")) {
-                        System.out.println("ERR LOGINREQUIRED");
+                        out.println("ERR LOGINREQUIRED");
                         continue;
                     }
                     switch (cmd) {
                         case "LOGIN":
                             if (parti.length < 2 || parti[1].trim().isEmpty()) {
-                                System.out.println("ERR SYNTAX");
+                                out.println("ERR SYNTAX");
                             } else{
                                 utente = parti[1].trim();
-                                System.out.println("OK");
+                                out.println("OK WELCOME");
                             }
                             break;
                         case "ADD": 
                         if (parti.length < 2 || parti[1].trim().isEmpty()) {
-                            System.out.println("ERR SYNTAX");
+                            out.println("ERR SYNTAX");
                         } else{
                             Messaggio m = lavagna.aggiungi(utente, parti[1].trim());
-                            System.out.println("OK ADDED");
+                            out.println("OK ADDED" + m.id);
                         }    
+                        case "LIST":
+                            out.println(lavagna.lista());
                             break;
-                        case "END": 
-                        
-
+                        case "DELL":
+                            if (parti.length < 2 || parti[1].trim().isEmpty()) {
+                                out.println("ERR SYNTAX");
+                            } else{
+                                try {
+                                    int id = Integer.parseInt(parti[1]);
+                                    out.println(lavagna.elimina(id, utente));
+                                } catch (NumberFormatException e) {
+                                    out.println("ERR SYNTAX");
+                                }
+                            } 
+                            break;
+                        case "QUIT": 
+                            out.println("BYE");
+                            socket.close();
                             break;
                         default:
+                            out.println("ERR UNKNOWNCMD");
                             break;
                     }
                 }
-
             }
-            
-
             catch (Exception e) {
                 System.out.println("Errore CLient: " + e.getMessage());
             }
