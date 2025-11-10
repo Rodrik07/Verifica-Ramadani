@@ -42,14 +42,14 @@ public class Main {
                     }
                     //Divisione di una stringa in comando e argomento
                     String[] parti = linea.split(" ", 2);
-                    String cmd = parti[0].toUpperCase();
+                    String cmd = parti[0].toUpperCase(); //cmd = comandi;
 
                     if (utente == null && !cmd.equals("LOGIN") && !cmd.equals("QUIT")) {
                         out.println("ERR LOGINREQUIRED");
                         continue;
                     }
                     switch (cmd) {
-                        case "LOGIN":
+                        case "LOGIN": //per fare il login, da fare SUBITO 
                             if (parti.length < 2 || parti[1].trim().isEmpty()) {
                                 out.println("ERR SYNTAX");
                             } else{
@@ -57,17 +57,17 @@ public class Main {
                                 out.println("OK WELCOME");
                             }
                             break;
-                        case "ADD": 
+                        case "ADD": //aggiungere un testo alla lista
                         if (parti.length < 2 || parti[1].trim().isEmpty()) {
                             out.println("ERR SYNTAX");
                         } else{
                             Messaggio m = lavagna.aggiungi(utente, parti[1].trim());
                             out.println("OK ADDED" + m.id);
                         }    
-                        case "LIST":
+                        case "LIST": //far vedere la lista
                             out.println(lavagna.lista());
                             break;
-                        case "DELL":
+                        case "DELL": //rimuovere dalla lista tramite id
                             if (parti.length < 2 || parti[1].trim().isEmpty()) {
                                 out.println("ERR SYNTAX");
                             } else{
@@ -79,11 +79,11 @@ public class Main {
                                 }
                             } 
                             break;
-                        case "QUIT": 
+                        case "QUIT": //per uscire
                             out.println("BYE");
                             socket.close();
                             break;
-                        default:
+                        default: //per qualsiasi cosa che non sia uno di quei comandi da "comando sconosciutto"
                             out.println("ERR UNKNOWNCMD");
                             break;
                     }
