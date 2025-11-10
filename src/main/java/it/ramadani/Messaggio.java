@@ -13,7 +13,7 @@ public class Messaggio {
 
     @Override
     public String toString() {
-        return "Messaggio [id= " + id + ", autore= " + autore + ", testo= " + testo + "]";
+        return "Messaggio [id= " + id + ", autore= " + autore + ", testo= " + testo + "]\n";
     }
 
 }

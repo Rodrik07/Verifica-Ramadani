@@ -32,7 +32,7 @@ public class Main {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true); 
             ) {
-                out.println("WELCOME");
+                out.println("WELCOME CLIENT,\nFAI IL LOGIN");
 
                 String linea;
                 while((linea = in.readLine()) != null){
@@ -54,7 +54,7 @@ public class Main {
                                 out.println("ERR SYNTAX");
                             } else{
                                 utente = parti[1].trim();
-                                out.println("OK WELCOME");
+                                out.println("OK WELCOME " + utente.toUpperCase());
                             }
                             break;
                         case "ADD": //aggiungere un testo alla lista
